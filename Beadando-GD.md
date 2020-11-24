@@ -215,4 +215,4 @@ Harmadik étterem árai:
 
 ![](4.PNG)
 
-A második étteremben tudunk a legkedvezőbben diétás ételeket enni.
+**A második étteremben tudunk a legkedvezőbben diétás ételeket enni.**
