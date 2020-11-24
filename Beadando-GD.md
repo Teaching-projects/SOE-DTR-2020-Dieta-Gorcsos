@@ -198,7 +198,7 @@ Második étterem árai:
 
 Összköltség ennél az éttermnél :
 
-![](3.png)
+![](3.PNG)
 
 Harmadik étterem árai: 
 |Étel megnevezése| Ár|
@@ -213,6 +213,6 @@ Harmadik étterem árai:
 
 Összköltség ennél az éttermnél :
 
-![](4.png)
+![](4.PNG)
 
 A második étteremben tudunk a legkedvezőbben diétás ételeket enni.
