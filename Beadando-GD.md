@@ -178,8 +178,15 @@ Cukor 0
 
 Modellünk lefuttatása után optimális megoldást kapunk. 
 
-![](1.png)
-![](2.png)
+```ampl
+Problem:    beadando
+Rows:       7
+Columns:    8
+Non-zeros:  43
+Status:     OPTIMAL
+Objective:  Osszes_koltseg = 2559.012277 (MINimum)
+```
+
 
 Láthatjuk, hogy az egyes ételekből mennyit kell ennünk, hogy a lehető legolcsóbban fogyni tudjunk.
 
