@@ -34,30 +34,39 @@ set Tapanyag;
 
 Három paramétert kellett definiálnom. Az egyik az ételek ára/elkészítési költsége, amelyet mindegyik étel típusra kellett meghatároznom. A második paraméter a minimum napi beviteli érték a tápanyagokból ezt nyilvánvalóan a tápanyagoknál kellett meghatározni. Harmadik paraméter az ételek tartalmára vonatkozik, hogy az egyes tápanyagokból mennyit tartalmaznak.
 
-`param Etel_ar {Etelek} >=0;  
+```ampl
+param Etel_ar {Etelek} >=0;  
 param Szukseges {Tapanyag} >=0;    
-param Tartalom {Etelek,Tapanyag} >=0;`
+param Tartalom {Etelek,Tapanyag} >=0;
+```
 
 Két változót vezettem be. Az egyik a ’Megesszuk’ nevű változó mely az étrendben szerepelő egyes ételek mennyiségének jelölésére szolgál. Ezt a változót az étel típusokra kellett meghatározni. Majd a második változó egy összköltség számoló. Ezzel az összköltség változóval sokkal egyszerűbb a modellünk végén a kiíratás.  
 
-`var Megesszuk {Etelek} >=0;    
-var Osszkoltseg;`
+```ampl
+var Megesszuk {Etelek} >=0;    
+var Osszkoltseg;
+```
 
 A modellben van egy jelentős tényező amely korlátozza, hogy melyik ételek/étrendek elfogadhatóak. A korlátozás összeadja a kiválasztott étrendek tápanyagainak értéket, amely nem lehet kevesebb mint a minimális napi beviteli érték. Második korlátozást az összköltség kiszámítására hoztam létre. 
 
-**s.t. Tapanyag_szukseglet {t in Tapanyag}:  
-sum {e in Etelek} Tartalom[e,t] * Megesszuk[e] >= Szukseges[t];**
+```ampl
+s.t. Tapanyag_szukseglet {t in Tapanyag}:  
+sum {e in Etelek} Tartalom[e,t] * Megesszuk[e] >= Szukseges[t];
 
-**s.t. Osszeskoltseg: Osszkoltseg =  
-sum {e in Etelek} Etel_ar[e] * Megesszuk[e];**
+s.t. Osszeskoltseg: Osszkoltseg =  
+sum {e in Etelek} Etel_ar[e] * Megesszuk[e];
+```
 
 Mivel a modell célja a lehető legolcsóbb diéta elkészítése, így a célfüggvény egy minimum számítás.
 
-**minimize Osszes_koltseg: Osszkoltseg;**
+```ampl
+minimize Osszes_koltseg: Osszkoltseg;
+```
 
 Készítettem egy kiíratást is, melynek segítségével látható az összes költség amit elköltöttünk különféle ételekre, mely ételekből mennyit kell ennünk a diétában továbbá látható az is, hogy a tápanyagok minimum napi beviteli értékeiből mekkora az az érték amit teljesítettünk.
 
-**printf "Összes Költség (Ft): %g\n", Osszkoltseg;  
+```ampl
+printf "Összes Költség (Ft): %g\n", Osszkoltseg;  
 param Tapanyagszukseglet {t in Tapanyag} :=  
 sum {e in Etelek} Tartalom[e,t] * Megesszuk[e];  
 for {e in Etelek}  
@@ -68,10 +77,11 @@ for {t in Tapanyag}
 {  
 printf "Szükséges napi bevitel a(z) %s - ból/ből %g amelyből teljesítettünk %g -ot \n",  
 t,Szukseges[t], Tapanyagszukseglet[t];  
-}**
+}
+```
 
 ## Adatok feltöltése
-
+```ampl
 data;
 
 set Etelek := Csirke Tojasrantotta Hamburger Salata Pizza Porkolt Rantotthus;  
@@ -106,9 +116,9 @@ Feherje 120
 Zsir 35  
 Cukor 0  
 ;
-
+```
 ## Teljes kód
-
+```ampl
 set Etelek; 
 set Tapanyag;  
 
@@ -163,7 +173,7 @@ Feherje 120
 Zsir 35  
 Cukor 0  
 ;
-
+```
 ## Futtatás után
 
 Modellünk lefuttatása után optimális megoldást kapunk. 
