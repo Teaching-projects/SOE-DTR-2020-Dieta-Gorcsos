@@ -1,42 +1,42 @@
-set Etelek; #Ételek halmaz
-set Tapanyag; #Tápanyagok halmaz
+set Etelek; #Ã‰telek halmaz
+set Tapanyag; #TÃ¡panyagok halmaz
 
 
-param Etel_ar {Etelek}, >=0;		#Mennyibe kerül az adott étel (Ft)
-param Szukseges {Tapanyag}, >=0;		#Napi szükséges bevitel a különféle tápanyagokból
-param Tartalom {Etelek,Tapanyag}, >=0;		#Az adott tápanyagokból mennyit tartalmaz a kaja
+param Etel_ar {Etelek}, >=0;		#Mennyibe kerÃ¼l az adott Ã©tel (Ft)
+param Szukseges {Tapanyag}, >=0;		#Napi szÃ¼ksÃ©ges bevitel a kÃ¼lÃ¶nfÃ©le tÃ¡panyagokbÃ³l
+param Tartalom {Etelek,Tapanyag}, >=0;		#Az adott tÃ¡panyagokbÃ³l mennyit tartalmaz a kaja
 
 
 
-var megesszuk {Etelek}, >=0 ;
-var Osszkoltseg;		#Összes költség
+var Megesszuk {Etelek}, >=0 ;
+var Osszkoltseg;		#Ã–sszes kÃ¶ltsÃ©g
 
 
-#Korlátozni kell mely ételeket ehetjük meg,
+#KorlÃ¡tozni kell mely Ã©teleket ehetjÃ¼k meg,
 s.t. Tapanyag_szukseglet {t in Tapanyag}:
-sum {e in Etelek} Tartalom[e,t] * megesszuk[e] >= Szukseges[t];
+sum {e in Etelek} Tartalom[e,t] * Megesszuk[e] >= Szukseges[t];
 
 
 s.t. Osszeskoltseg: Osszkoltseg =
-sum {e in Etelek} Etel_ar[e] * megesszuk[e];
+sum {e in Etelek} Etel_ar[e] * Megesszuk[e];
 
-#Minimálizáljuk az összes kaja költségét
+#MinimÃ¡lizÃ¡ljuk az Ã¶sszes kaja kÃ¶ltsÃ©gÃ©t
 minimize Osszes_koltseg: Osszkoltseg;
 
 
 solve;
 
-#Kiíratás
-printf "Összes Költség (Ft): %g\n", Osszkoltseg;
+#KiÃ­ratÃ¡s
+printf "Ã–sszes KÃ¶ltsÃ©g (Ft): %g\n", Osszkoltseg;
 param Tapanyagszukseglet {t in Tapanyag} :=
-sum {e in Etelek} Tartalom[e,t] * megesszuk[e];
+sum {e in Etelek} Tartalom[e,t] * Megesszuk[e];
 for {e in Etelek}
 {
-printf "Ennyit kell ennünk ebbõl: %s: %g\n", e, megesszuk[e];
+printf "Ennyit kell ennÃ¼nk ebbÅ‘l - %s: %g\n", e, Megesszuk[e];
 }
 for {t in Tapanyag}
 {
-printf "Szükséges napi bevitel a(z) %s - ból/bõl %g amelybõl teljesítettünk %g -ot \n",
+printf "SzÃ¼ksÃ©ges napi bevitel a(z) %s - bÃ³l/bÅ‘l %g amelybÅ‘l teljesÃ­tettÃ¼nk %g -ot \n",
 t,Szukseges[t], Tapanyagszukseglet[t];
 }
 
