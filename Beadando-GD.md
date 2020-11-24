@@ -55,110 +55,110 @@ Mivel a modell célja a lehető legolcsóbb diéta elkészítése, így a célf�
 
 Készítettem egy kiíratást is, melynek segítségével látható az összes költség amit elköltöttünk különféle ételekre, mely ételekből mennyit kell ennünk a diétában továbbá látható az is, hogy a tápanyagok minimum napi beviteli értékeiből mekkora az az érték amit teljesítettünk.
 
-**printf "Összes Költség (Ft): %g\n", Osszkoltseg;
-param Tapanyagszukseglet {t in Tapanyag} :=
-sum {e in Etelek} Tartalom[e,t] * Megesszuk[e];
-for {e in Etelek}
-{
-printf "Ennyit kell ennünk ebből: %s: %g\n", e, Megesszuk[e];
-}
-for {t in Tapanyag}
-{
-printf "Szükséges napi bevitel a(z) %s - ból/ből %g amelyből teljesítettünk %g -ot \n",
-t,Szukseges[t], Tapanyagszukseglet[t];
+**printf "Összes Költség (Ft): %g\n", Osszkoltseg;  
+param Tapanyagszukseglet {t in Tapanyag} :=  
+sum {e in Etelek} Tartalom[e,t] * Megesszuk[e];  
+for {e in Etelek}  
+{  
+printf "Ennyit kell ennünk ebből: %s: %g\n", e, Megesszuk[e];  
+}  
+for {t in Tapanyag}  
+{  
+printf "Szükséges napi bevitel a(z) %s - ból/ből %g amelyből teljesítettünk %g -ot \n",  
+t,Szukseges[t], Tapanyagszukseglet[t];  
 }**
 
 ## Adatok feltöltése
 
 data;
 
-set Etelek := Csirke Tojasrantotta Hamburger Salata Pizza Porkolt Rantotthus;
+set Etelek := Csirke Tojasrantotta Hamburger Salata Pizza Porkolt Rantotthus;  
 
-set Tapanyag := Energia Szenhidrat Feherje Zsir Cukor;
+set Tapanyag := Energia Szenhidrat Feherje Zsir Cukor;  
 
-param Etel_ar :=
-Csirke 1200
-Tojasrantotta 600
-Hamburger 1590
-Salata 1000
-Pizza 1450
-Porkolt 1200
-Rantotthus 1300
+param Etel_ar :=  
+Csirke 1200  
+Tojasrantotta 600  
+Hamburger 1590  
+Salata 1000  
+Pizza 1450  
+Porkolt 1200  
+Rantotthus 1300  
 ;
 
 param Tartalom:
-		 Energia 	Szenhidrat	 Feherje 	Zsir	 Cukor :=
-Csirke 		 960		155		 58		6	 0
-Tojasrantotta  186		0.55		 6		18	 0.30
-Hamburger	 1200		180		 30		50	 5
-Salata		 300		20		 30		10 	 2
-Pizza		 1600		214		 60		68	 10
-Porkolt	 900		160	 	 26		40	 2
-Rantotthus	 1100		175		 40		35	 1
+		 Energia 	Szenhidrat	 Feherje 	Zsir	 Cukor :=  
+Csirke 		 960		155		 58		6	 0  
+Tojasrantotta  186		0.55		 6		18	 0.30  
+Hamburger	 1200		180		 30		50	 5  
+Salata		 300		20		 30		10 	 2  
+Pizza		 1600		214		 60		68	 10  
+Porkolt	 900		160	 	 26		40	 2  
+Rantotthus	 1100		175		 40		35	 1  
 ;
 
-param Szukseges :=
-Energia 1700
-Szenhidrat 220
-Feherje 120
-Zsir 35
-Cukor 0
+param Szukseges :=  
+Energia 1700  
+Szenhidrat 220  
+Feherje 120  
+Zsir 35  
+Cukor 0  
 ;
 
 ## Teljes kód
 
 set Etelek; 
-set Tapanyag;
+set Tapanyag;  
 
-param Etel_ar {Etelek}, >=0;	
-param Szukseges {Tapanyag}, >=0;
-param Tartalom {Etelek,Tapanyag}, >=0;
+param Etel_ar {Etelek}, >=0;  
+param Szukseges {Tapanyag}, >=0;  
+param Tartalom {Etelek,Tapanyag}, >=0;  
 
-var megesszuk {Etelek}, >=0 ;
-var Osszkoltseg;
+var megesszuk {Etelek}, >=0;  
+var Osszkoltseg;  
 
-s.t. Tapanyag_szukseglet {t in Tapanyag}:
-sum {e in Etelek} Tartalom[e,t] * megesszuk[e] >= Szukseges[t];
+s.t. Tapanyag_szukseglet {t in Tapanyag}:  
+sum {e in Etelek} Tartalom[e,t] * megesszuk[e] >= Szukseges[t];  
 
-s.t. Osszeskoltseg: Osszkoltseg =
-sum {e in Etelek} Etel_ar[e] * megesszuk[e];
+s.t. Osszeskoltseg: Osszkoltseg =  
+sum {e in Etelek} Etel_ar[e] * megesszuk[e];  
 
-**minimize Osszes_koltseg: Osszkoltseg;
+**minimize Osszes_koltseg: Osszkoltseg;  
 
 solve;
 
-data;
-set Etelek := Csirke Tojasrantotta Hamburger Salata Pizza Porkolt Rantotthus;
+data;  
+set Etelek := Csirke Tojasrantotta Hamburger Salata Pizza Porkolt Rantotthus;  
 
-set Tapanyag := Energia Szenhidrat Feherje Zsir Cukor;
+set Tapanyag := Energia Szenhidrat Feherje Zsir Cukor;  
 
-param Etel_ar :=
-Csirke 1200
-Tojasrantotta 600
-Hamburger 1590
-Salata 1000
-Pizza 1450
-Porkolt 1200
-Rantotthus 1300
+param Etel_ar :=  
+Csirke 1200  
+Tojasrantotta 600  
+Hamburger 1590  
+Salata 1000  
+Pizza 1450  
+Porkolt 1200  
+Rantotthus 1300  
 ;
 
-param Tartalom:
-		 Energia Szenhidrat Feherje Zsir Cukor :=
-Csirke 960 155 58 6 0
-Tojasrantotta	 186		0.55		 6		18	 0.30
-Hamburger	 1200		180		 30		50	 5
-Salata		 300		20		 30		10 	 2
-Pizza		 1600		214		 60		68	 10
-Porkolt	 900		160	 	 26		40	 2
-Rantotthus	 1100		175		 40		35	 1
+param Tartalom:  
+		 Energia Szenhidrat Feherje Zsir Cukor :=  
+Csirke 960 155 58 6 0  
+Tojasrantotta	 186		0.55		 6		18	 0.30  
+Hamburger	 1200		180		 30		50	 5  
+Salata		 300		20		 30		10 	 2  
+Pizza		 1600		214		 60		68	 10  
+Porkolt	 900		160	 	 26		40	 2  
+Rantotthus	 1100		175		 40		35	 1  
 ;
 
-param Szukseges :=
-Energia 1700
-Szenhidrat 220
-Feherje 120
-Zsir 35
-Cukor 0
+param Szukseges :=  
+Energia 1700  
+Szenhidrat 220  
+Feherje 120  
+Zsir 35  
+Cukor 0  
 ;
 
 ## Futtatás után
