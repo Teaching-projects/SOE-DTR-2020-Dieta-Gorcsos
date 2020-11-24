@@ -1,0 +1,167 @@
+# DTR beadandó
+---
+## Bevezetés
+
+A döntéstámogató rendszerek tárgy beadandóját egy diétáról írtam. Adott egy halmaz ételekkel és egy halmaz tápanyagokkal. Minden ételnél adott hogy a különböző tápanyagokból mennyit tartalmaznak . A tápanyagoknak van egy napi minimum szükséges beviteli értéke amit el kell érnie a diétának. Ahhoz hogy a karácsonyi egész napos kajálásokból felszedett pár plusz kilót könnyedén leadhassuk olyan ételeket kell ennünk, amivel a bevitt tápanyagok a minimum szükséges értékekhez a legközelebb esnek. Minden egyes diétás ételnek van egy ára amennyiért megvesszük vagy amennyiből el tudjuk készíteni. A program célja az lenne, hogy a legolcsóbb diétát hozzuk létre.
+
+## Beviteli adatok
+
+Elsőként egy táblázatot fogok bemutatni amely tartalmazza a különféle ételeket és az ahhoz tartozó tápanyagok értékeit. 
+
+|  | Energia (kcal) | Szénhidrát (g) | Fehérje (g) | Zsír (g) | Cukor (g) |
+| :------ | :------: | :------: | :------: | :------: | :------: |
+| Csirkemell és rizs | 960 | 155 | 58 | 6 | 0 | 
+| Tojásrántotta 3 tojásból | 186 | 0.55 | 6 | 18 | 0.30 |
+| Hamburger | 1200 | 180 | 30 | 50 | 5 |
+| Cézát saláta | 300 | 20 | 30 | 50 | 2 |
+| Pizza | 1600 | 214 | 60 | 68 | 10 |
+| Marhapörkölt és nokedli | 900 | 160 | 26 | 40 | 2 |
+| Rántotthús és krumpli | 1100 | 175 | 40 | 35 | 1 |
+
+Napi minimum beviteli érték, hogy fogyni tudjunk :
+* Energia: 1700 kcal
+* Szénhidrát: 220 gramm
+* Fehérje: 120 gramm
+* Zsír: 35 gramm
+* Cukor: 0 gramm
+
+Modellünk 2 halmazból áll. Egy amelyik az ételeket tartalmazza és egy amelyik a különféle tápanyagokat. 
+
+**set Etelek;
+set Tapanyag;**
+
+Három paramétert kellett definiálnom. Az egyik az ételek ára/elkészítési költsége, amelyet mindegyik étel típusra kellett meghatároznom. A második paraméter a minimum napi beviteli érték a tápanyagokból ezt nyilvánvalóan a tápanyagoknál kellett meghatározni. Harmadik paraméter az ételek tartalmára vonatkozik, hogy az egyes tápanyagokból mennyit tartalmaznak.
+
+**param Etel_ar {Etelek}, >=0;		
+param Szukseges {Tapanyag}, >=0;
+param Tartalom {Etelek,Tapanyag}, >=0;**
+
+Két változót vezettem be. Az egyik a ’Megesszuk’ nevű változó mely az étrendben szerepelő egyes ételek mennyiségének jelölésére szolgál. Ezt a változót az étel típusokra kellett meghatározni. Majd a második változó egy összköltség számoló. Ezzel az összköltség változóval sokkal egyszerűbb a modellünk végén a kiíratás.  
+
+**var Megesszuk {Etelek}, >=0 ;
+var Osszkoltseg;**
+
+A modellben van egy jelentős tényező amely korlátozza, hogy melyik ételek/étrendek elfogadhatóak. A korlátozás összeadja a kiválasztott étrendek tápanyagainak értéket, amely nem lehet kevesebb mint a minimális napi beviteli érték. Második korlátozást az összköltség kiszámítására hoztam létre. 
+
+**s.t. Tapanyag_szukseglet {t in Tapanyag}:
+sum {e in Etelek} Tartalom[e,t] * Megesszuk[e] >= Szukseges[t];**
+
+**s.t. Osszeskoltseg: Osszkoltseg =
+sum {e in Etelek} Etel_ar[e] * Megesszuk[e];**
+
+Mivel a modell célja a lehető legolcsóbb diéta elkészítése, így a célfüggvény egy minimum számítás.
+
+**minimize Osszes_koltseg: Osszkoltseg;**
+
+Készítettem egy kiíratást is, melynek segítségével látható az összes költség amit elköltöttünk különféle ételekre, mely ételekből mennyit kell ennünk a diétában továbbá látható az is, hogy a tápanyagok minimum napi beviteli értékeiből mekkora az az érték amit teljesítettünk.
+
+**printf "Összes Költség (Ft): %g\n", Osszkoltseg;
+param Tapanyagszukseglet {t in Tapanyag} :=
+sum {e in Etelek} Tartalom[e,t] * Megesszuk[e];
+for {e in Etelek}
+{
+printf "Ennyit kell ennünk ebből: %s: %g\n", e, Megesszuk[e];
+}
+for {t in Tapanyag}
+{
+printf "Szükséges napi bevitel a(z) %s - ból/ből %g amelyből teljesítettünk %g -ot \n",
+t,Szukseges[t], Tapanyagszukseglet[t];
+}**
+
+## Adatok feltöltése
+
+data;
+
+set Etelek := Csirke Tojasrantotta Hamburger Salata Pizza Porkolt Rantotthus;
+
+set Tapanyag := Energia Szenhidrat Feherje Zsir Cukor;
+
+param Etel_ar :=
+Csirke 1200
+Tojasrantotta 600
+Hamburger 1590
+Salata 1000
+Pizza 1450
+Porkolt 1200
+Rantotthus 1300
+;
+
+param Tartalom:
+		 Energia 	Szenhidrat	 Feherje 	Zsir	 Cukor :=
+Csirke 		 960		155		 58		6	 0
+Tojasrantotta  186		0.55		 6		18	 0.30
+Hamburger	 1200		180		 30		50	 5
+Salata		 300		20		 30		10 	 2
+Pizza		 1600		214		 60		68	 10
+Porkolt	 900		160	 	 26		40	 2
+Rantotthus	 1100		175		 40		35	 1
+;
+
+param Szukseges :=
+Energia 1700
+Szenhidrat 220
+Feherje 120
+Zsir 35
+Cukor 0
+;
+
+## Teljes kód
+
+set Etelek; 
+set Tapanyag;
+
+param Etel_ar {Etelek}, >=0;	
+param Szukseges {Tapanyag}, >=0;
+param Tartalom {Etelek,Tapanyag}, >=0;
+
+var megesszuk {Etelek}, >=0 ;
+var Osszkoltseg;
+
+s.t. Tapanyag_szukseglet {t in Tapanyag}:
+sum {e in Etelek} Tartalom[e,t] * megesszuk[e] >= Szukseges[t];
+
+s.t. Osszeskoltseg: Osszkoltseg =
+sum {e in Etelek} Etel_ar[e] * megesszuk[e];
+
+**minimize Osszes_koltseg: Osszkoltseg;
+
+solve;
+
+data;
+set Etelek := Csirke Tojasrantotta Hamburger Salata Pizza Porkolt Rantotthus;
+
+set Tapanyag := Energia Szenhidrat Feherje Zsir Cukor;
+
+param Etel_ar :=
+Csirke 1200
+Tojasrantotta 600
+Hamburger 1590
+Salata 1000
+Pizza 1450
+Porkolt 1200
+Rantotthus 1300
+;
+
+param Tartalom:
+		 Energia 	Szenhidrat	 Feherje 	Zsir	 Cukor :=
+Csirke 		 960		155		 58		6	 0
+Tojasrantotta	 186		0.55		 6		18	 0.30
+Hamburger	 1200		180		 30		50	 5
+Salata		 300		20		 30		10 	 2
+Pizza		 1600		214		 60		68	 10
+Porkolt	 900		160	 	 26		40	 2
+Rantotthus	 1100		175		 40		35	 1
+;
+
+param Szukseges :=
+Energia 1700
+Szenhidrat 220
+Feherje 120
+Zsir 35
+Cukor 0
+;
+
+## Futtatás után
+
+![](1.png)
+![](2.png)
