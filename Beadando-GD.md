@@ -163,6 +163,8 @@ Cukor 0
 
 ## Futtatás után
 
+Modellünk lefuttatása után optimális megoldást kapunk. 
+
 ![](1.png)
 ![](2.png)
 
