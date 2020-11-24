@@ -27,19 +27,19 @@ Napi minimum beviteli érték, hogy fogyni tudjunk :
 
 Modellünk 2 halmazból áll. Egy amelyik az ételeket tartalmazza és egy amelyik a különféle tápanyagokat. 
 
-**set Etelek;  
-set Tapanyag;**
+`set Etelek;  `
+`set Tapanyag;`
 
 Három paramétert kellett definiálnom. Az egyik az ételek ára/elkészítési költsége, amelyet mindegyik étel típusra kellett meghatároznom. A második paraméter a minimum napi beviteli érték a tápanyagokból ezt nyilvánvalóan a tápanyagoknál kellett meghatározni. Harmadik paraméter az ételek tartalmára vonatkozik, hogy az egyes tápanyagokból mennyit tartalmaznak.
 
-**param Etel_ar {Etelek}, >=0;  	
-param Szukseges {Tapanyag}, >=0;  
-param Tartalom {Etelek,Tapanyag}, >=0;**
+`param Etel_ar {Etelek} >=0; ` 	
+`param Szukseges {Tapanyag} >=0;  `
+`param Tartalom {Etelek,Tapanyag} >=0;`
 
 Két változót vezettem be. Az egyik a ’Megesszuk’ nevű változó mely az étrendben szerepelő egyes ételek mennyiségének jelölésére szolgál. Ezt a változót az étel típusokra kellett meghatározni. Majd a második változó egy összköltség számoló. Ezzel az összköltség változóval sokkal egyszerűbb a modellünk végén a kiíratás.  
 
-**var Megesszuk {Etelek}, >=0;   
-var Osszkoltseg;**
+`var Megesszuk {Etelek} >=0;`   
+`var Osszkoltseg;`
 
 A modellben van egy jelentős tényező amely korlátozza, hogy melyik ételek/étrendek elfogadhatóak. A korlátozás összeadja a kiválasztott étrendek tápanyagainak értéket, amely nem lehet kevesebb mint a minimális napi beviteli érték. Második korlátozást az összköltség kiszámítására hoztam létre. 
 
