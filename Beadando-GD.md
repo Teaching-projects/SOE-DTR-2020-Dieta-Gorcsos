@@ -165,3 +165,51 @@ Cukor 0
 
 ![](1.png)
 ![](2.png)
+
+Láthatjuk, hogy az egyes ételekből mennyit kell ennünk, hogy a lehető legolcsóbban fogyni tudjunk.
+
+Megnéztem, hogy 3 étteremnél hogyan alakultak az ételek árai és az összes költség.
+
+Az első étterem árai :
+|Étel megnevezése| Ár|
+|---|----|
+|Csirkemell és rizs|1200|
+|Tojásrántotta 3 tojásból|600|
+|Hamburger|1590|
+|Cézár saláta|1000|
+|Pizza|1450|
+|Marhapörkölt és nokedli|1200|
+|Rántotthús és krumpli|1300|
+
+Összköltség ennél az éttermnél :
+![](2.png)
+
+Második étterem árai: 
+|Étel megnevezése| Ár|
+|---|----|
+|Csirkemell és rizs|800|
+|Tojásrántotta 3 tojásból|300|
+|Hamburger|1100|
+|Cézár saláta|700|
+|Pizza|950|
+|Marhapörkölt és nokedli|1000|
+|Rántotthús és krumpli|1100|
+
+Összköltség ennél az éttermnél :
+![](3.png)
+
+Harmadik étterem árai: 
+|Étel megnevezése| Ár|
+|---|----|
+|Csirkemell és rizs|1600|
+|Tojásrántotta 3 tojásból|900|
+|Hamburger|1900|
+|Cézár saláta|1200|
+|Pizza|1800|
+|Marhapörkölt és nokedli|1600|
+|Rántotthús és krumpli|1300|
+
+Összköltség ennél az éttermnél :
+![](4.png)
+
+A második étteremben tudunk a legkedvezőbben diétás ételeket enni.
