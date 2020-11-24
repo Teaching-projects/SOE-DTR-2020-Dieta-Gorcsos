@@ -27,26 +27,26 @@ Napi minimum beviteli érték, hogy fogyni tudjunk :
 
 Modellünk 2 halmazból áll. Egy amelyik az ételeket tartalmazza és egy amelyik a különféle tápanyagokat. 
 
-**set Etelek;
+**set Etelek;  
 set Tapanyag;**
 
 Három paramétert kellett definiálnom. Az egyik az ételek ára/elkészítési költsége, amelyet mindegyik étel típusra kellett meghatároznom. A második paraméter a minimum napi beviteli érték a tápanyagokból ezt nyilvánvalóan a tápanyagoknál kellett meghatározni. Harmadik paraméter az ételek tartalmára vonatkozik, hogy az egyes tápanyagokból mennyit tartalmaznak.
 
-**param Etel_ar {Etelek}, >=0;		
-param Szukseges {Tapanyag}, >=0;
+**param Etel_ar {Etelek}, >=0;  	
+param Szukseges {Tapanyag}, >=0;  
 param Tartalom {Etelek,Tapanyag}, >=0;**
 
 Két változót vezettem be. Az egyik a ’Megesszuk’ nevű változó mely az étrendben szerepelő egyes ételek mennyiségének jelölésére szolgál. Ezt a változót az étel típusokra kellett meghatározni. Majd a második változó egy összköltség számoló. Ezzel az összköltség változóval sokkal egyszerűbb a modellünk végén a kiíratás.  
 
-**var Megesszuk {Etelek}, >=0 ;
+**var Megesszuk {Etelek}, >=0;   
 var Osszkoltseg;**
 
 A modellben van egy jelentős tényező amely korlátozza, hogy melyik ételek/étrendek elfogadhatóak. A korlátozás összeadja a kiválasztott étrendek tápanyagainak értéket, amely nem lehet kevesebb mint a minimális napi beviteli érték. Második korlátozást az összköltség kiszámítására hoztam létre. 
 
-**s.t. Tapanyag_szukseglet {t in Tapanyag}:
+**s.t. Tapanyag_szukseglet {t in Tapanyag}:  
 sum {e in Etelek} Tartalom[e,t] * Megesszuk[e] >= Szukseges[t];**
 
-**s.t. Osszeskoltseg: Osszkoltseg =
+**s.t. Osszeskoltseg: Osszkoltseg =  
 sum {e in Etelek} Etel_ar[e] * Megesszuk[e];**
 
 Mivel a modell célja a lehető legolcsóbb diéta elkészítése, így a célfüggvény egy minimum számítás.
@@ -127,7 +127,8 @@ sum {e in Etelek} Etel_ar[e] * megesszuk[e];
 
 solve;
 
-data;  
+data;
+
 set Etelek := Csirke Tojasrantotta Hamburger Salata Pizza Porkolt Rantotthus;  
 
 set Tapanyag := Energia Szenhidrat Feherje Zsir Cukor;  
