@@ -2,13 +2,13 @@ set Etelek; #Ételek halmaz
 set Tapanyag; #Tápanyagok halmaz
 
 
-param Etel_ar {Etelek}, >=0;		#Mennyibe kerül az adott étel (Ft)
-param Szukseges {Tapanyag}, >=0;		#Napi szükséges bevitel a különféle tápanyagokból
-param Tartalom {Etelek,Tapanyag}, >=0;		#Az adott tápanyagokból mennyit tartalmaz a kaja
+param Etel_ar {Etelek} >=0;		#Mennyibe kerül az adott étel (Ft)
+param Szukseges {Tapanyag} >=0;		#Napi szükséges bevitel a különféle tápanyagokból
+param Tartalom {Etelek,Tapanyag} >=0;		#Az adott tápanyagokból mennyit tartalmaz a kaja
 
 
 
-var Megesszuk {Etelek}, >=0 ;
+var Megesszuk {Etelek} >=0 ;
 var Osszkoltseg;		#Összes költség
 
 
