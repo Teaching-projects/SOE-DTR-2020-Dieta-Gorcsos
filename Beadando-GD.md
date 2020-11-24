@@ -101,11 +101,11 @@ Rantotthus 1300
 param Tartalom:
 		 Energia 	Szenhidrat	 Feherje 	Zsir	 Cukor :=  
 Csirke 		 960		155		 58		6	 0  
-Tojasrantotta  186		0.55		 6		18	 0.30  
+Tojasrantotta    186		0.55		 6		18	 0.30  
 Hamburger	 1200		180		 30		50	 5  
 Salata		 300		20		 30		10 	 2  
 Pizza		 1600		214		 60		68	 10  
-Porkolt	 900		160	 	 26		40	 2  
+Porkolt	 	 900		160	 	 26		40	 2  
 Rantotthus	 1100		175		 40		35	 1  
 ;
 
@@ -122,11 +122,11 @@ Cukor 0
 set Etelek; 
 set Tapanyag;  
 
-param Etel_ar {Etelek}, >=0;  
-param Szukseges {Tapanyag}, >=0;  
-param Tartalom {Etelek,Tapanyag}, >=0;  
+param Etel_ar {Etelek} >=0;  
+param Szukseges {Tapanyag} >=0;  
+param Tartalom {Etelek,Tapanyag} >=0;  
 
-var megesszuk {Etelek}, >=0;  
+var megesszuk {Etelek} >=0;  
 var Osszkoltseg;  
 
 s.t. Tapanyag_szukseglet {t in Tapanyag}:  
@@ -155,14 +155,14 @@ Porkolt 1200
 Rantotthus 1300  
 ;
 
-param Tartalom:  
-		 Energia Szenhidrat Feherje Zsir Cukor :=  
-Csirke 960 155 58 6 0  
-Tojasrantotta	 186		0.55		 6		18	 0.30  
+param Tartalom:
+		 Energia 	Szenhidrat	 Feherje 	Zsir	 Cukor :=  
+Csirke 		 960		155		 58		6	 0  
+Tojasrantotta    186		0.55		 6		18	 0.30  
 Hamburger	 1200		180		 30		50	 5  
 Salata		 300		20		 30		10 	 2  
 Pizza		 1600		214		 60		68	 10  
-Porkolt	 900		160	 	 26		40	 2  
+Porkolt	 	 900		160	 	 26		40	 2  
 Rantotthus	 1100		175		 40		35	 1  
 ;
 
