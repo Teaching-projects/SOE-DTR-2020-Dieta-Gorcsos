@@ -182,6 +182,7 @@ Az első étterem árai :
 |Rántotthús és krumpli|1300|
 
 Összköltség ennél az éttermnél :
+
 ![](2.png)
 
 Második étterem árai: 
@@ -196,6 +197,7 @@ Második étterem árai:
 |Rántotthús és krumpli|1100|
 
 Összköltség ennél az éttermnél :
+
 ![](3.png)
 
 Harmadik étterem árai: 
@@ -210,6 +212,7 @@ Harmadik étterem árai:
 |Rántotthús és krumpli|1300|
 
 Összköltség ennél az éttermnél :
+
 ![](4.png)
 
 A második étteremben tudunk a legkedvezőbben diétás ételeket enni.
