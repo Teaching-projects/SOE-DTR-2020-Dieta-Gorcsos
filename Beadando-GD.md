@@ -27,8 +27,10 @@ Napi minimum beviteli érték, hogy fogyni tudjunk :
 
 Modellünk 2 halmazból áll. Egy amelyik az ételeket tartalmazza és egy amelyik a különféle tápanyagokat. 
 
-`set Etelek;    
-set Tapanyag;`
+```ampl
+set Etelek;    
+set Tapanyag;
+```
 
 Három paramétert kellett definiálnom. Az egyik az ételek ára/elkészítési költsége, amelyet mindegyik étel típusra kellett meghatároznom. A második paraméter a minimum napi beviteli érték a tápanyagokból ezt nyilvánvalóan a tápanyagoknál kellett meghatározni. Harmadik paraméter az ételek tartalmára vonatkozik, hogy az egyes tápanyagokból mennyit tartalmaznak.
 
