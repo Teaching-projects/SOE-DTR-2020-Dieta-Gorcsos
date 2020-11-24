@@ -143,8 +143,8 @@ Rantotthus 1300
 ;
 
 param Tartalom:
-		 Energia 	Szenhidrat	 Feherje 	Zsir	 Cukor :=
-Csirke 		 960		155		 58		6	 0
+		 Energia Szenhidrat Feherje Zsir Cukor :=
+Csirke 960 155 58 6 0
 Tojasrantotta	 186		0.55		 6		18	 0.30
 Hamburger	 1200		180		 30		50	 5
 Salata		 300		20		 30		10 	 2
