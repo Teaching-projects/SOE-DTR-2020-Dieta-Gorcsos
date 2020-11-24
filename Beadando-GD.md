@@ -185,6 +185,26 @@ Columns:    8
 Non-zeros:  43
 Status:     OPTIMAL
 Objective:  Osszes_koltseg = 2559.012277 (MINimum)
+
+
+OPTIMAL LP SOLUTION FOUND
+Time used:   0.0 secs
+Memory used: 0.1 Mb (128932 bytes)
+Összes Költség (Ft): 2559.01
+Ennyit kell ennünk ebből: Csirke: 1.69085
+Ennyit kell ennünk ebből: Tojasrantotta: 0
+Ennyit kell ennünk ebből: Hamburger: 0
+Ennyit kell ennünk ebből: Salata: 0
+Ennyit kell ennünk ebből: Pizza: 0.365513
+Ennyit kell ennünk ebből: Porkolt: 0
+Ennyit kell ennünk ebből: Rantotthus: 0
+Szükséges napi bevitel a(z) Energia - ból/ből 1700 amelyből teljesítettünk 2208.04 -ot 
+Szükséges napi bevitel a(z) Szenhidrat - ból/ből 220 amelyből teljesítettünk 340.301 -ot 
+Szükséges napi bevitel a(z) Feherje - ból/ből 120 amelyből teljesítettünk 120 -ot 
+Szükséges napi bevitel a(z) Zsir - ból/ből 35 amelyből teljesítettünk 35 -ot 
+Szükséges napi bevitel a(z) Cukor - ból/ből 0 amelyből teljesítettünk 3.65513 -ot 
+Model has been successfully processed
+
 ```
 
 
