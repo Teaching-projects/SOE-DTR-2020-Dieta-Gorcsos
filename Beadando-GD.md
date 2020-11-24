@@ -225,7 +225,12 @@ Az első étterem árai :
 
 Összköltség ennél az éttermnél :
 
-![](2.png)
+```ampl
+OPTIMAL LP SOLUTION FOUND
+Time used:   0.0 secs
+Memory used: 0.1 Mb (128932 bytes)
+Összes Költség (Ft): 2559.01 
+```
 
 Második étterem árai: 
 |Étel megnevezése| Ár|
@@ -240,7 +245,12 @@ Második étterem árai:
 
 Összköltség ennél az éttermnél :
 
-![](3.PNG)
+```ampl
+OPTIMAL LP SOLUTION FOUND
+Time used:   0.0 secs
+Memory used: 0.1 Mb (128932 bytes)
+Összes Költség (Ft): 1699.92
+```
 
 Harmadik étterem árai: 
 |Étel megnevezése| Ár|
@@ -255,6 +265,11 @@ Harmadik étterem árai:
 
 Összköltség ennél az éttermnél :
 
-![](4.PNG)
+```ampl
+OPTIMAL LP SOLUTION FOUND
+Time used:   0.0 secs
+Memory used: 0.1 Mb (128932 bytes)
+Összes Költség (Ft): 3363.28
+```
 
 **A második étteremben tudunk a legkedvezőbben diétás ételeket enni.**
